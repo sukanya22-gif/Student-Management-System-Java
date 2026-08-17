@@ -1,16 +1,17 @@
-# Student-Management-System-Java# Student Management System - Java
-## About
-Console based Java application to manage student records using OOP concepts.
+# Student Management System
+
+A console-based Student Management System built using Java.
 
 ## Features
-- Add new student with ID, Name, Marks
+- Add new student details
 - Display all students
 - Search student by ID
-- Menu driven interface using switch case
 
-## Tech Stack
-Java, OOP, ArrayList, Scanner
+## Technologies Used
+- Java
+- OOP Concepts
+- ArrayList
 
 ## How to Run
-javac "Student Management System.java"
-java "Student Management System"
+1. Compile: 'javac Main.java`
+2. Run: `java Main`
