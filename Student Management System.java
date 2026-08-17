@@ -1,53 +1,85 @@
-import java.io.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 class Student {
     int id;
     String name;
-    int marks;
+    double marks;
     
-    Student(int id, String name, int marks) {
+    Student(int id, String name, double marks) {
         this.id = id;
         this.name = name;
         this.marks = marks;
     }
     
-    public String toString() {
-        return id + "," + name + "," + marks;
+    void display() {
+        System.out.println("ID: " + id + ", Name: " + name + ", Marks: " + marks);
     }
 }
 
-public class StudentManagementSystem {
-    static ArrayList<Student> students = new ArrayList<>();
-    static Scanner sc = new Scanner(System.in);
-    
+public class Main {
     public static void main(String[] args) {
-        while(true) {
-            System.out.println("\n1.Add 2.Display 3.Search 4.Exit");
-            int choice = sc.nextInt();
-            if(choice==1) addStudent();
-            else if(choice==2) display();
-            else if(choice==3) search();
-            else break;
-        }
-    }
-    
-    static void addStudent() {
-        System.out.print("ID: "); int id = sc.nextInt();
-        System.out.print("Name: "); String name = sc.next();
-        System.out.print("Marks: "); int marks = sc.nextInt();
-        students.add(new Student(id,name,marks));
-        System.out.println("Student Added!");
-    }
-    
-    static void display() {
-        for(Student s: students) 
-            System.out.println(s.id + " " + s.name + " " + s.marks);
-    }
-    
-    static void search() {
-        System.out.print("Enter ID: "); int id = sc.nextInt();
-        for(Student s: students) 
-            if(s.id==id) System.out.println(s.id + " " + s.name);
+        Scanner sc = new Scanner(System.in);
+        ArrayList<Student> students = new ArrayList<>();
+        int choice;
+        
+        do {
+            System.out.println("\n--- Student Management System ---");
+            System.out.println("1. Add Student");
+            System.out.println("2. Display All Students");
+            System.out.println("3. Search Student by ID");
+            System.out.println("4. Exit");
+            System.out.print("Enter choice: ");
+            choice = sc.nextInt();
+            
+            switch(choice) {
+                case 1:
+                    System.out.print("Enter ID: ");
+                    int id = sc.nextInt();
+                    sc.nextLine();
+                    System.out.print("Enter Name: ");
+                    String name = sc.nextLine();
+                    System.out.print("Enter Marks: ");
+                    double marks = sc.nextDouble();
+                    students.add(new Student(id, name, marks));
+                    System.out.println("Student Added Successfully!");
+                    break;
+                    
+                case 2:
+                    if(students.isEmpty()) {
+                        System.out.println("No students to display!");
+                    } else {
+                        for(Student s : students) {
+                            s.display();
+                        }
+                    }
+                    break;
+                    
+                case 3:
+                    System.out.print("Enter ID to search: ");
+                    int searchId = sc.nextInt();
+                    boolean found = false;
+                    for(Student s : students) {
+                        if(s.id == searchId) {
+                            s.display();
+                            found = true;
+                            break;
+                        }
+                    }
+                    if(!found) {
+                        System.out.println("Student not found!");
+                    }
+                    break;
+                    
+                case 4:
+                    System.out.println("Exiting...");
+                    break;
+                    
+                default:
+                    System.out.println("Invalid choice!");
+            }
+        } while(choice != 4);
+        
+        sc.close();
     }
 }
